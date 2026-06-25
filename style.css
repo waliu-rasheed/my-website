@@ -23,6 +23,7 @@ button {
     color: #667eea;
     cursor: pointer;
     margin-top: 20px; 
+    font-weight: bold;
 } 
 button:hover { 
     transform: scale(1.05); 
@@ -36,11 +37,4 @@ button:hover {
      object-fit: cover;
      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-button {
-     background: white;
-     color: #667eea;
-     padding: 12px 24px;
-     border: none;
-     border-radius: 8px;
-     font-weight: bold;
-     cursor: pointer;
+
