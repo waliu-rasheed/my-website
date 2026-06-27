@@ -37,4 +37,21 @@ button:hover {
      object-fit: cover;
      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
+.about, .contact {
+     margin-top: 40px;
+     padding: 20px;
+     background: white;
+     border-radius: 10px;
+     color: #333;
+}
+.contact a {
+     display: inline-block;
+     margin: 10px;
+     padding: 10px 20px;
+     background: #667eea;
+     color: white
+     ; text-decoration: none;
+     border-radius: 5px;
+}
+     
 
