@@ -33,29 +33,21 @@ const WINNING_COMBINATIONS = [
         if (checkWin(currentPlayer)) { 
             statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
             gameActive = false 
+            setTimeout(() => {
+              startGame()
+            }, 2000)
             return 
         } 
         
         if (isDraw()) { 
             statusText.textContent = "It's a Draw! 🤝" 
             gameActive = false 
-            return 
+            setTimeout(() => {
+              startGame()
+          }, 2000)
+          return 
         } 
         
-        isXTurn =!isXTurn 
-        statusText.textContent = isXTurn? "Player X's turn" : "Player O's turn" 
-    } 
-    
-    function checkWin(currentPlayer) { 
-        return WINNING_COMBINATIONS.some(combination => { 
-            return combination.every(index => { 
-                return cellElements[index].textContent === currentPlayer 
-            }) 
-        }) 
-    } 
-    
-    function isDraw() { 
-        return [...cellElements].every(cell => { 
-            return cell.textContent === 'X' || cell.textContent === 'O' 
-        }) 
+        isXTurn = !isXTurn 
+        statusText.textContent = isXTurn? 
     }
