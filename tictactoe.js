@@ -19,7 +19,8 @@ const WINNING_COMBINATIONS = [
         gameActive = true 
         statusText.textContent = "Player X's turn" 
         cellElements.forEach(cell => { 
-            cell.textContent = '' 
+            cell.textContent = ''
+            cell.style.pointerEvents = 'auto' // make sure cells are clickable 
             cell.addEventListener('click', handleClick, { once: true }) 
         }) 
     }
@@ -32,7 +33,8 @@ const WINNING_COMBINATIONS = [
         
         if (checkWin(currentPlayer)) { 
             statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
-            gameActive = false 
+            gameActive = false
+            cellElements.forEach(cell => cell.style.pointerEvents = 'none') // ADD THIS LINE 
             setTimeout(() => {
               startGame()
             }, 2000)
