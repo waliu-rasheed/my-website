@@ -29,12 +29,12 @@ const WINNING_COMBINATIONS = [
         if (!gameActive) return 
         const cell = e.target 
         const currentPlayer = isXTurn? 'X' : 'O' 
-        cell.textContent = currentPlayer 
-        
+        cell.textContent = currentPlayer // <-- THIS IS THE IMPORTANT LINE
+                
         if (checkWin(currentPlayer)) { 
             statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
             gameActive = false
-            cellElements.forEach(cell => cell.style.pointerEvents = 'none') // ADD THIS LINE 
+            cellElements.forEach(cell => cell.style.pointerEvents = 'none') 
             setTimeout(() => {
               startGame()
             }, 2000)
@@ -44,6 +44,7 @@ const WINNING_COMBINATIONS = [
         if (isDraw()) { 
             statusText.textContent = "It's a Draw! 🤝" 
             gameActive = false 
+            cellElements.forEach(cell => cell.style.pointerEvents = 'none')
             setTimeout(() => {
               startGame()
           }, 2000)
@@ -51,5 +52,5 @@ const WINNING_COMBINATIONS = [
         } 
         
         isXTurn = !isXTurn 
-        statusText.textContent = isXTurn? 
+        statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn"
     }
