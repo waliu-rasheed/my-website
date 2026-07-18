@@ -35,35 +35,41 @@ const WINNING_COMBINATIONS = [
     }
 
     function handleClick(e) { 
-        if (!gameActive) return 
-        const cell = e.target 
-        if (cell.textContent !== '' ) return // ADD THIS LINE
-
-        const currentPlayer = isXTurn? 'X' : 'O' 
-        cell.textContent = currentPlayer
-        cell.style.pointerEvents = 'none' // lock this cell
-        // ... reset of your code
-                
-        if (checkWin(currentPlayer)) { 
-            statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
-            gameActive = false
-            cellElements.forEach(cell => cell.style.pointerEvents = 'none') 
-            setTimeout(() => {
-              startGame()
-            }, 2000)
-            return 
-        } 
-        
-        if (isDraw()) { 
-            statusText.textContent = "It's a Draw! 🤝" 
-            gameActive = false 
-            cellElements.forEach(cell => cell.style.pointerEvents = 'none')
-            setTimeout(() => {
-              startGame()
-          }, 2000)
-          return 
-        } 
-        
-        isXTurn = !isXTurn 
-        statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn"
-    }
+      if (!gameActive) return 
+      
+      const cell = e.target 
+      
+      // 1. Don't click filled cells 
+      if (cell.textContent !== '') return 
+     
+      // 2. Place X or O 
+      const currentPlayer = isXTurn ? 'X' : 'O' 
+      cell.textContent = currentPlayer 
+      cell.style.pointerEvents = 'none' // lock this cell 
+      
+      // 3. Check win 
+      if (checkWin(currentPlayer)) { 
+        statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
+        gameActive = false 
+        cellElements.forEach(cell => cell.style.pointerEvents = 'none') 
+        setTimeout(() => { 
+            startGame() 
+        }, 2000) 
+        return 
+    } 
+    
+    // 4. Check draw 
+    if (isDraw()) { 
+        statusText.textContent = "It's a Draw! 🤝" 
+        gameActive = false 
+        cellElements.forEach(cell => cell.style.pointerEvents = 'none') 
+        setTimeout(() => { 
+            startGame() 
+        }, 2000) 
+        return 
+    } 
+    
+    // 5. THIS IS THE MOST IMPORTANT LINE - Switch turns 
+    isXTurn = !isXTurn 
+    statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn" 
+}
