@@ -17,19 +17,32 @@ const WINNING_COMBINATIONS = [
     function startGame() { 
         isXTurn = true 
         gameActive = true 
-        statusText.textContent = "Player X's turn" 
+        statusText.textContent = "Player X's turn"
+
+        // reset cells
         cellElements.forEach(cell => { 
             cell.textContent = ''
-            cell.style.pointerEvents = 'auto' // make sure cells are clickable 
-            cell.addEventListener('click', handleClick, { once: true }) 
+            cell.style.pointerEvents = 'auto'
+            cell.replaceWith(cell.cloneNode(true)) // this removes old listeners 
         }) 
+        // ADD THIS LIE - re-get cells after cloning
+        cellElements = document.querySelectorAll('.cell')
+
+        // then add listeners
+        cellElements.forEach(cell => {
+            cell.addEventListener('click', handleClick)
+        })
     }
-    
+
     function handleClick(e) { 
         if (!gameActive) return 
         const cell = e.target 
+        if (cell.textContent !== '' ) return // ADD THIS LINE
+
         const currentPlayer = isXTurn? 'X' : 'O' 
-        cell.textContent = currentPlayer // <-- THIS IS THE IMPORTANT LINE
+        cell.textContent = currentPlayer
+        cell.style.pointerEvents = 'none' // lock this cell
+        // ... reset of your code
                 
         if (checkWin(currentPlayer)) { 
             statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
