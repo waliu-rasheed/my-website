@@ -28,17 +28,12 @@ body {
         justify-content: center; 
     } 
     .cell { 
-        width: 100px; 
-        height: 100px; 
-        background: white; 
-        border: 3px solid #667eea; 
-        border-radius: 10px; 
         font-size: 3rem; 
         font-weight: bold; 
-        color: #333; 
+        color: #000; /* make sure text is black */ 
         display: flex; 
         align-items: center; 
         justify-content: center; 
         cursor: pointer; 
     } 
-    /* ...rest of the game CSS... */
+    
