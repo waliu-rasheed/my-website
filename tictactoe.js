@@ -35,30 +35,24 @@ const WINNING_COMBINATIONS = [
     }
 
     function handleClick(e) { 
-      if (!gameActive) return 
-      const cell = e.target 
-      if (cell.textContent !== '') return 
-      
-      const currentPlayer = isXTurn ? 'X' : 'O' 
-      cell.textContent = currentPlayer // this puts X or O inside 
-      cell.style.pointerEvents = 'none' 
-      
-      if (checkWin(currentPlayer)) { 
-        statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
-        gameActive = false 
-        cellElements.forEach(c => c.style.pointerEvents = 'none') 
-        setTimeout(startGame, 2000) 
-        return 
-    } 
-    
-    if (isDraw()) { 
-      statusText.textContent = "It's a Draw! 🤝" 
-      gameActive = false 
-      cellElements.forEach(c => c.style.pointerEvents = 'none') 
-      setTimeout(startGame, 2000) 
-      return 
+        const cell = e.target 
+        if (!gameActive || cell.textContent !== '') return 
+        
+        const currentPlayer = isXTurn ? 'X' : 'O' 
+        cell.textContent = currentPlayer 
+        cell.style.color = 'black' // force it again in JS 
+        
+        if (checkWin(currentPlayer)) { 
+            statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
+            gameActive = false 
+            return 
+        } 
+        if (isDraw()) { 
+            statusText.textContent = "It's a Draw! 🤝" 
+            gameActive = false 
+            return 
+        } 
+        
+        isXTurn = !isXTurn 
+        statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn" 
     }
-     
-    isXTurn = !isXTurn 
-    statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn" 
-}

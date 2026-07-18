@@ -27,13 +27,24 @@ body {
         margin: 20px auto; 
         justify-content: center; 
     } 
-    .cell { 
-        font-size: 3rem; 
-        font-weight: bold; 
+    .cell {
+        width: 1000px;
+        height: 100px;
+        background-color: #fff;
+        border: 3px solid #0077ff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center; 
+        font-size: 3.5rem; 
+        font-weight: 900; 
         color: #000; /* make sure text is black */ 
         display: flex; 
         align-items: center; 
         justify-content: center; 
-        cursor: pointer; 
-    } 
+        cursor: pointer;
+        transition: background 0.2; 
+    }
+    .cell:active {
+        background: #d0e7ff;
+    }
     
