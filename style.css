@@ -19,29 +19,27 @@ body {
          border: 4px solid white; 
         }
     /* TIC-TAC-TOE CODE */ 
-    .board { 
-        display: grid; 
-        grid-template-columns: repeat(3, 100px); 
-        grid-template-rows: repeat(3, 100px); 
-        gap: 8px; 
-        justify-content: center; 
-        margin: 20px auto; 
-    } 
-    
+   .board { 
+    display: grid; grid-template-columns: repeat(3, 1fr); /* 1fr = equal columns */ 
+    gap: 8px; 
+    max-width: 320px; /* keeps it from stretching on PC */ 
+    margin: 20px auto; 
+    }
+
     .cell { 
-        width: 100px; 
-        height: 100px; 
+        aspect-ratio: 1 / 1; /* makes perfect squares */ 
+        width: 100%; 
         background: white; 
         border: 3px solid #0077ff; 
         border-radius: 10px; 
         display: flex; 
         align-items: center; 
         justify-content: center; 
-        font-size: 3.5rem; 
+        font-size: clamp(2rem, 10vw, 3.5rem); /* scales on phone + PC */ 
         font-weight: 900; 
-        color: black; 
+        color: black !important; 
         cursor: pointer; 
-    } 
+    }
     
     .cell:hover { 
         background: #d0e7ff; 

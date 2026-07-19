@@ -1,58 +1,67 @@
-const cellElements = document.querySelectorAll('[data-cell]') 
-const board = document.getElementById('board') 
+const cells = document.querySelectorAll('.cell') 
 const statusText = document.getElementById('status') 
-const restartButton = document.getElementById('restartButton') 
+const restartBtn = document.getElementById('restartButton') 
+
 let isXTurn = true 
 let gameActive = true 
+let board = ['', '', '', '', '', '', '', '', ''] // 9 cells 
 
-const WINNING_COMBINATIONS = [ 
+const winConditions = [ 
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows 
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns 
     [0, 4, 8], [2, 4, 6] // diagonals 
     ] 
     
-    startGame() 
-    restartButton.addEventListener('click', startGame) 
+    cells.forEach(cell => cell.addEventListener('click', handleClick)) 
+    restartBtn.addEventListener('click', startGame) 
     
-    function startGame() { 
-        isXTurn = true 
-        gameActive = true 
-        statusText.textContent = "Player X's turn"
-
-        // reset cells
-        cellElements.forEach(cell => { 
-            cell.textContent = ''
-            cell.style.pointerEvents = 'auto'
-            cell.replaceWith(cell.cloneNode(true)) // this removes old listeners 
-        }) 
-        // ADD THIS LIE - re-get cells after cloning
-        cellElements = document.querySelectorAll('.cell')
-
-        // then add listeners
-        cellElements.forEach(cell => {
-            cell.addEventListener('click', handleClick)
-        })
-    }
-
     function handleClick(e) { 
         const cell = e.target 
-        if (!gameActive || cell.textContent !== '') return 
+        const index = parseInt(cell.getAttribute('data-cell')) 
         
-        const currentPlayer = isXTurn ? 'X' : 'O' 
+        if (!gameActive || board[index]!== '') return 
+        
+        const currentPlayer = isXTurn? 'X' : 'O' 
+        board[index] = currentPlayer 
         cell.textContent = currentPlayer 
-        cell.style.color = 'black' // force it again in JS 
+        cell.style.color = 'black' 
+        cell.style.fontWeight = '900' 
         
-        if (checkWin(currentPlayer)) { 
-            statusText.textContent = `Player ${currentPlayer} Wins! 🎉` 
+        checkWinner() 
+        
+        if (gameActive) { 
+            isXTurn =!isXTurn 
+            statusText.textContent = isXTurn? "Player X's turn" : "Player O's turn" 
+        } 
+    } 
+    
+    function checkWinner() { 
+        let roundWon = false 
+        for (let i = 0; i < winConditions.length; i++) { 
+            const [a, b, c] = winConditions[i] 
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) { 
+                roundWon = true 
+                break 
+            } 
+        } 
+        
+        if (roundWon) { 
+            statusText.textContent = `Player ${isXTurn? 'X' : 'O'} Wins!` 
             gameActive = false 
             return 
         } 
-        if (isDraw()) { 
-            statusText.textContent = "It's a Draw! 🤝" 
+        
+        if (!board.includes('')) { 
+            statusText.textContent = "It's a Draw!" 
             gameActive = false 
             return 
         } 
-        
-        isXTurn = !isXTurn 
-        statusText.textContent = isXTurn ? "Player X's turn" : "Player O's turn" 
+    } 
+    
+    function startGame() { 
+        board = ['', '', '', '', '', '', '', ''] // reset 9 cells 
+        isXTurn = true 
+        gameActive = true 
+        statusText.textContent = "Player X's turn" 
+        cells.forEach(cell => cell.textContent = '') 
     }
