@@ -18,33 +18,34 @@ body {
          border-radius: 50%; 
          border: 4px solid white; 
         }
-        
-    /* PASTE TIC-TAC-TOE CODE HERE */ 
+    /* TIC-TAC-TOE CODE */ 
     .board { 
         display: grid; 
         grid-template-columns: repeat(3, 100px); 
-        gap: 5px; 
-        margin: 20px auto; 
+        grid-template-rows: repeat(3, 100px); 
+        gap: 8px; 
         justify-content: center; 
+        margin: 20px auto; 
     } 
-    .cell {
-        width: 1000px;
-        height: 100px;
-        background-color: #fff;
-        border: 3px solid #0077ff;
-        border-radius: 10px;
-        display: flex;
-        align-items: center; 
-        font-size: 3.5rem; 
-        font-weight: 900; 
-        color: #000; /* make sure text is black */ 
+    
+    .cell { 
+        width: 100px; 
+        height: 100px; 
+        background: white; 
+        border: 3px solid #0077ff; 
+        border-radius: 10px; 
         display: flex; 
         align-items: center; 
         justify-content: center; 
-        cursor: pointer;
-        transition: background 0.2; 
+        font-size: 3.5rem; 
+        font-weight: 900; 
+        color: black; 
+        cursor: pointer; 
+    } 
+    
+    .cell:hover { 
+        background: #d0e7ff; 
     }
-    .cell:active {
-        background: #d0e7ff;
-    }
+    
+    
     
